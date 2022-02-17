@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.gb.gbthymeleafwinter.entity.enums.Status;
 
 
@@ -30,6 +31,8 @@ public class Product {
     private Long id;
     private String title;
     private BigDecimal cost;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, fallbackPatterns = "yyyy.MM.dd")
     @Column(name = "manufacture_date")
     private LocalDate date;
 
