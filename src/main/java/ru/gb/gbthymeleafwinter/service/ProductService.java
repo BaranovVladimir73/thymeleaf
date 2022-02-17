@@ -9,12 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gb.gbthymeleafwinter.dao.ProductDao;
+import ru.gb.gbthymeleafwinter.dao.Cart;
 import ru.gb.gbthymeleafwinter.entity.Product;
 import ru.gb.gbthymeleafwinter.entity.enums.Status;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -23,6 +22,7 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductDao productDao;
+    private final Cart cart;
 
     public Product save(Product product) {
         if (product.getId() != null) {
@@ -58,6 +58,20 @@ public class ProductService {
 
     }
 
+    public void addProductToCart(Product product){
+        cart.addProduct(product);
+    }
+
+    public void deleteProductFromCart(int id){
+
+        cart.deleteProductById(id);
+
+    }
+
+
+    public List<Product> showAllProductFromCart(){
+        return cart.getCartList();
+    }
 
 
 
